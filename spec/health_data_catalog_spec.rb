@@ -59,8 +59,8 @@ describe HealthDataCatalog do
     it "leaves the array without any array entries" do
       @row_hash.select { |key,value| value.class == Array }.should be_empty 
     end
-    it "test" do
-      binding.pry
+    it "pry" do
+      #binding.pry
     end
   end
 
