@@ -1,3 +1,7 @@
+# Taken from GitHub
+# https://gist.github.com/yaauie/3420743/raw/4bfa25578a001656a3d3be95b90f285a1196832c/sparsify.rb
+
+
 # Extend into a hash to provide sparse and unsparse methods. 
 # 
 # {'foo'=>{'bar'=>'bingo'}}.sparse #=> {'foo.bar'=>'bingo'}

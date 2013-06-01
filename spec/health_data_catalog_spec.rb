@@ -54,10 +54,13 @@ describe HealthDataCatalog do
       @row_hash["tags"].should be_instance_of(String)
     end
     it "leaves the array without any enumerable entries" do
-      @row_hash.select { |e| e.respond_to?(:each) }.should be_empty
+      @row_hash.select { |key,value| value.respond_to?(:each) }.should be_empty
+    end
+    it "leaves the array without any array entries" do
+      @row_hash.select { |key,value| value.class == Array }.should be_empty 
     end
     it "test" do
-      #binding.pry
+      binding.pry
     end
   end
 
