@@ -64,5 +64,14 @@ describe HealthDataCatalog do
     end
   end
 
+  describe "::combine_hash_keys" do
+    it "combines all the keys for 2 hashes and returns an array of unique keys" do
+      hash1 = { a: 1, b: 1 }
+      hash2 = { b: 1, c: 1 }
+      combined_keys = HealthDataCatalog.combine_hash_keys([hash1,hash2])
+      combined_keys.should eq([:a,:b,:c])
+    end
+  end
+
 end
 
