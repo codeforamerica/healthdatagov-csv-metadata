@@ -12,6 +12,8 @@ Overview & Usage
 * `create_csv_script.rb` is a simple script that uses the library to create a csv.
 * `lib/health_data_catalog.rb` is the workhorse library, with a bunch of functions to break down the task of getting data, processing it, and making a catalog
 
+Note: because this is a very-beta version, it uses VCR to save metadata locally. If you are using this to routinely create a catalog, you will want to be sure to delete the `vcr_cassettes` directory that will be created before running the script again (this flushes all the old data, and will get all new data from the API).
+
 Other Info
 ----
 
