@@ -28,9 +28,6 @@ describe HealthDataCatalog do
     it "returns a hash" do
       @metadata_entry.should be_instance_of(Hash)
     end
-    it "blah" do
-      #binding.pry
-    end
   end
 
   describe "::compress_tags" do
@@ -58,9 +55,6 @@ describe HealthDataCatalog do
     end
     it "leaves the array without any array entries" do
       @row_hash.select { |key,value| value.class == Array }.should be_empty 
-    end
-    it "pry" do
-      #binding.pry
     end
   end
 
