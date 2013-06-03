@@ -11,6 +11,7 @@ Installation / Usage
 To create a metadata catalog, run the following commands in the project directory:
 
 `bundle install`
+
 `ruby create_csv_script.rb`
 
 Code Overview
