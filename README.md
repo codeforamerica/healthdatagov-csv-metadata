@@ -8,6 +8,8 @@ It's super hacky right now, but seems to get the job done! And it even has TESTS
 Installation / Usage
 ----
 
+This script requires Ruby 1.9.3, RubyGems, and bundler. Installation instructions can be found at: (http://www.ruby-lang.org/en/downloads/)[http://www.ruby-lang.org/en/downloads/]
+
 To create a metadata catalog, run the following commands in the project directory:
 
 ```shell
