@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe HealthDataCatalog do
   describe "::download_list_of_datasets" do
