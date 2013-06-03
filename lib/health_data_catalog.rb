@@ -5,10 +5,43 @@ require 'csv'
 
 module HealthDataCatalog
 
+  ### VCR configuration (to cache results locally; probably not wanted in production) ###
+
   VCR.configure do |c|
     c.cassette_library_dir = 'vcr_cassettes'
     c.hook_into :webmock
   end
+
+
+  ### Major workhorse methods ###
+
+  # Gets data, processes it, and writes to a file.
+  # This is the core interface of the library.
+  def self.create_metadata_file(output_path_and_name)
+    all_metadata = all_metadata_array
+    standardized_metadata = standardize_hashes(all_metadata)
+    output_matrix = Array.new
+    output_matrix[0] = standardized_metadata[0].keys
+    standardized_metadata.each do |metadata_hash|
+      output_matrix << metadata_hash.values
+    end
+    CSV.open(output_path_and_name, "w") do |csv|
+      output_matrix.each do |data_row|
+        csv << data_row
+      end
+    end
+  end
+
+  # Returns an array of hashes containing metadata for all HealthCare.gov data sets
+  def self.all_metadata_array
+    list = download_list_of_datasets
+    all_metadata = Array.new
+    list.each { |id| all_metadata << convert_nested_result_to_row_hash(get_metadata_for_dataset(id).to_hash) }
+    all_metadata
+  end
+
+
+  ### API call methods ###
 
   def self.download_list_of_datasets
     VCR.use_cassette("dataset-list") do
@@ -21,6 +54,9 @@ module HealthDataCatalog
       metadata = HTTParty.get("http://hub.healthdata.gov/api/2/rest/dataset/#{id}")
     end
   end
+
+
+  ### Misc helper methods ###
 
   def self.compress_tags(tags_array)
     tags_array.join(', ')
@@ -42,28 +78,6 @@ module HealthDataCatalog
       row_hash[key] = row_hash[key].join(", ") if value.class == Array
     end
     row_hash
-  end
-
-  def self.all_metadata_array
-    list = download_list_of_datasets
-    all_metadata = Array.new
-    list.each { |id| all_metadata << convert_nested_result_to_row_hash(get_metadata_for_dataset(id).to_hash) }
-    all_metadata
-  end
-
-  def self.create_metadata_file(output_path_and_name)
-    all_metadata = all_metadata_array
-    standardized_metadata = standardize_hashes(all_metadata)
-    output_matrix = Array.new
-    output_matrix[0] = standardized_metadata[0].keys
-    standardized_metadata.each do |metadata_hash|
-      output_matrix << metadata_hash.values
-    end
-    CSV.open(output_path_and_name, "w") do |csv|
-      output_matrix.each do |data_row|
-        csv << data_row
-      end
-    end
   end
 
   def self.combine_hash_keys(array_of_hashes)
