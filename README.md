@@ -15,6 +15,8 @@ bundle install
 ruby create_csv_script.rb
 ```
 
+You'll then have a file named *healthdatagov_metadata_catalog.csv* in the project directory representing metadata for all the datasets available on HealthData.gov.
+
 Code Overview
 ----
 
