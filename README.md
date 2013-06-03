@@ -5,7 +5,15 @@ This is a Ruby script (and quasi-library) that creates an Excel-readable metadat
 
 It's super hacky right now, but seems to get the job done! And it even has TESTS!
 
-Overview & Usage
+Installation / Usage
+----
+
+To create a metadata catalog, run the following commands in the project directory:
+
+`bundle install`
+`ruby create_csv_script.rb`
+
+Code Overview
 ----
 
 * `healthdatagov_metadata_catalog_beta_060213.csv` is the first version of the data catalog
