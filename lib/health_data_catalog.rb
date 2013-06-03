@@ -51,8 +51,27 @@ module HealthDataCatalog
   end
 
   def self.combine_hash_keys(array_of_hashes)
-    all_keys = Array.new
     array_of_hashes.reduce([]) { |all_array, hash| all_array + hash.keys }.uniq
+  end
+
+  # Takes an array of hashes with overlapping (but not identical) keys and 
+  # returns an array of hashes with the same values, but where each hash 
+  # has every key in the set and each hash is ordered the same way
+  def self.standardize_hashes(array_of_hashes)
+    all_keys_array = combine_hash_keys(array_of_hashes)
+    standardized_hash_array = Array.new
+    array_of_hashes.each do |orig_hash|
+      standardized_hash = Hash.new
+      all_keys_array.each do |key|
+        if orig_hash.has_key?(key)
+          standardized_hash[key] = orig_hash[key]
+        else
+          standardized_hash[key] = ""
+        end
+      end
+      standardized_hash_array << standardized_hash
+    end
+    standardized_hash_array
   end
 
 end
