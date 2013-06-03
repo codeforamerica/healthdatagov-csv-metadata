@@ -74,15 +74,16 @@ describe HealthDataCatalog do
   end
 
   describe "::standardize_hashes" do
+    before do
+      @hash1 = { a: 1, b: 2 }
+      @hash2 = { b: 3, c: 4 }
+      @standardized_hash_array = HealthDataCatalog.standardize_hashes([@hash1,@hash2])
+    end
     it "works :P" do
-      hash1 = { a: 1, b: 2 }
-      hash2 = { b: 3, c: 4 }
-      standardized_hash_array = HealthDataCatalog.standardize_hashes([hash1,hash2])
-      standardized_hash_array[0].should eq( { a: 1, b: 2, c: "" } )
-      standardized_hash_array[1].should eq( { a: "", b: 3, c: 4 } )
+      @standardized_hash_array[0].should eq( { a: 1, b: 2, c: "" } )
+      @standardized_hash_array[1].should eq( { a: "", b: 3, c: 4 } )
     end
   end
-
 
 end
 

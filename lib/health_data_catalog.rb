@@ -1,6 +1,7 @@
 require 'httparty'
 require './lib/sparsify'
 require 'vcr'
+require 'csv'
 
 module HealthDataCatalog
 
@@ -48,6 +49,21 @@ module HealthDataCatalog
     all_metadata = Array.new
     list.each { |id| all_metadata << convert_nested_result_to_row_hash(get_metadata_for_dataset(id).to_hash) }
     all_metadata
+  end
+
+  def self.create_metadata_file(output_path_and_name)
+    all_metadata = all_metadata_array
+    standardized_metadata = standardize_hashes(all_metadata)
+    output_matrix = Array.new
+    output_matrix[0] = standardized_metadata[0].keys
+    standardized_metadata.each do |metadata_hash|
+      output_matrix << metadata_hash.values
+    end
+    CSV.open(output_path_and_name, "w") do |csv|
+      output_matrix.each do |data_row|
+        csv << data_row
+      end
+    end
   end
 
   def self.combine_hash_keys(array_of_hashes)
