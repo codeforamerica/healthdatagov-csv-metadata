@@ -1,4 +1,4 @@
-**Download the current data catalog (beta!) by right-clicking on this link and selecting "Save As":**
+**Download the current data catalog (beta!) by right-clicking on the below link and selecting "Save Link As":**
 
 **https://raw.github.com/codeforamerica/healthdatagov-csv-metadata/master/healthdatagov_metadata_catalog_beta_060213.csv**
 
