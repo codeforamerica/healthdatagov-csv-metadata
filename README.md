@@ -3,6 +3,8 @@ healthdatagov-csv-metadata
 
 This is a Ruby script (and quasi-library) that creates an Excel-readable metadata catalog for data sets on [HealthData.gov](http://www.healthdata.gov).
 
+**Download the current data catalog (beta!) here: https://raw.github.com/codeforamerica/healthdatagov-csv-metadata/master/healthdatagov_metadata_catalog_beta_060213.csv**
+
 It's super hacky right now, but seems to get the job done! And it even has TESTS!
 
 Installation / Usage
